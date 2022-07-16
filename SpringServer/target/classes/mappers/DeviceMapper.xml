@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wclp.springserver.mapper.DeviceMapper">
+
+    <select id="getAllDevice" resultType="Device">
+        select *
+        from device
+    </select>
+
+    <select id="getDeviceInfo" resultType="Device" parameterType="String">
+        select device.deviceName, device.ledStatus,device.status, data.*
+        from device, data
+        where device.productKey = data.deviceKey and data.createtime = (SELECT max(data.createtime) FROM data where data.deviceKey = #{Key})
+        GROUP BY data.createtime
+    </select>
+
+    <update id="UpdateDeviceInfo" parameterType="Device">
+        update device
+        <set>
+            <if test="deviceName != null">deviceName=#{deviceName},</if>
+            <if test="ledStatus != null">ledStatus=#{ledStatus},</if>
+        </set>
+        where productKey=#{productKey}
+    </update>
+
+    <update id="Switch_Status" parameterType="String">
+        update device
+        <set>
+            <if test="l_status != null">l_status=#{l_status},</if>
+        </set>
+        where productKey=#{Key}
+    </update>
+
+    <update id="DeviceStatus" parameterType="Device">
+        update device
+        <set>
+            <if test="status != null">status=#{status},</if>
+        </set>
+        where productKey=#{productKey}
+    </update>
+
+    <select id="findTotalCount" resultType="int">
+        select count(*)
+        from device
+    </select>
+
+    <insert id="InsertDevice" parameterType="Device">
+        insert into spring_server.device
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="productKey != null" >
+                productKey,
+            </if>
+            <if test="deviceName != null" >
+                deviceName,
+            </if>
+            <if test="ledStatus != null" >
+                ledStatus,
+            </if>
+            <if test="createtime != null" >
+                createtime,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="productKey != null" >
+                #{productKey},
+            </if>
+            <if test="deviceName != null" >
+                #{deviceName},
+            </if>
+            <if test="ledStatus != null" >
+                #{ledStatus},
+            </if>
+            <if test="createtime != null" >
+                #{createtime},
+            </if>
+            <if test="status != null" >
+                #{status},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="InsertData" parameterType="IotData">
+        insert into spring_server.data
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="deviceKey != null" >
+                deviceKey,
+            </if>
+            <if test="temperature != null" >
+                temperature,
+            </if>
+            <if test="humidity != null" >
+                humidity,
+            </if>
+            <if test="deviceData != null" >
+                deviceData,
+            </if>
+            <if test="createtime != null" >
+                createtime,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="deviceKey != null" >
+                #{deviceKey},
+            </if>
+            <if test="temperature != null" >
+                #{temperature},
+            </if>
+            <if test="humidity != null" >
+                #{humidity},
+            </if>
+            <if test="deviceData != null" >
+                #{deviceData},
+            </if>
+            <if test="createtime != null" >
+                #{createtime},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>
