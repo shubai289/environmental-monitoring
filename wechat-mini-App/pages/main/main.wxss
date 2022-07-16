@@ -1,0 +1,70 @@
+/* pages/iot/dashboard.wxss */
+
+.label-property{
+  width: 130rpx;
+  font-size: 13pt;
+  align-items: center;
+  text-align: left;
+  padding: 10rpx;
+  color: gray;
+}
+
+.titleBox{
+  border: 1px solid silver;
+  width: 100%;
+  margin: 10rpx;
+  padding: 10rpx;
+}
+
+.changeBox{
+  margin-right: 5px;
+}
+
+.deviceInfo{
+  width: 100%;
+  justify-content: flex-end;
+  font-weight: 900;
+}
+
+.stateBlock{
+  float:right;
+}
+
+.deviceName{
+  font-size: 18px;
+  text-align: left;
+  margin-bottom: 0px;
+  margin-left: 5px;
+  width: 100%;
+  color:rgb(48, 39, 73);
+}
+
+.btn1 {
+  width: 40%;
+  margin-top: 0rpx;
+  background-color: burlywood;
+  color: white;
+  border-radius: 98rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn1::after {
+  border-radius: 98rpx;
+  border: 0; 
+}
+
+.view-btns-row {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  width: 100%;
+  margin: 30rpx 0;
+}
+/**index.wxss**/
+ec-canvas {
+  width: 100%;
+  height: 40%;
+}

@@ -1,0 +1,48 @@
+<view class='ticket-container'>
+  <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <!--Tab布局-->
+    <view class='title'>
+      <view class="{{0 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='0'>
+        <text>未读</text>
+        <hr class="line-style" />
+      </view>
+      <view class="{{1 == currentIndex ? 'title-sel-selected' : 'title-sel'}}" bindtap='titleClick' data-idx='1'>
+        <text>已读</text>
+        <hr class="line-style" />
+      </view>
+    </view>
+    <view class="divLine"></view>
+    <!--内容布局-->
+    <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
+      <swiper-item class='swiper'>
+        <view class="common-list">
+          <view class="list-item has-img" bindtap="toDetail" data-src="{{item.id}}" wx:for="{{message}}" wx:for-item="item" wx:if="{{item.checked == 0}}">
+            <view class="content-title">
+              <span>{{item.deviceName}}</span>
+              <text style="margin-top: 9rpx;">{{item.message}}</text>
+            </view>
+            <view class="content-date">
+              <view style="text-align: left;">{{item.createtime}}</view>
+              <view style="text-align: right; width: 500rpx;">未读 x</view>
+            </view>
+          </view>
+        </view>
+      </swiper-item>
+
+      <swiper-item class='swiper'>
+        <view class="common-list">
+          <view class="list-item has-img" index="1" id="1" bindtap="toDelete" data-src="{{item.id}}"  wx:for="{{message}}" wx:for-item="item" wx:if="{{item.checked == 1}}">
+            <view class="content-title">
+              <span>{{item.deviceName}}</span>
+              <text style="margin-top: 9rpx;">{{item.message}}</text>
+            </view>
+            <view class="content-date">
+              <view style="text-align: left;">{{item.createtime}}</view>
+              <view style="text-align: right; width: 500rpx;">已读 √</view>
+            </view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </scroll-view>
+</view>

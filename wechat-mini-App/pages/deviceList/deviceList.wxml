@@ -1,0 +1,23 @@
+<!--pages/deviceList1/deviceList.wxml-->
+
+<block class="lists">
+  <view class="news" wx:for="{{deviceList}}" wx:for-index="index" wx:for-item="value" wx:key="index">
+    <navigator url="../main/main?key={{value.productKey}}" class="content">
+      <view class='imgitem'>
+        <image class='imgitem' mode="widthFit"  src="/images/b.png"></image>
+      </view>
+      <view class="title">{{value.deviceName}}</view>
+      <view class="bottom">
+        <view class="icon">
+          设备ID：
+        </view>
+        <view class="icon">
+          {{value.productKey}}
+        </view>
+      </view>
+      <view class="detail">
+        {{value.createtime}}
+      </view>
+    </navigator>
+  </view> 
+</block> 
